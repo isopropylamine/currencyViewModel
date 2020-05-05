@@ -1,5 +1,3 @@
-package com.company;
-
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import lombok.Data;
@@ -18,15 +16,7 @@ public class CurrencyViewModelTest {
         final double amount;
         final Locale locale;
         final String expectedOutput;
-
-        public TestCase(double amount, Locale locale, String expectedOutput){
-            this.amount = amount;
-            this.locale = locale;
-            this.expectedOutput = expectedOutput;
-        }
-
     }
-
 
     public static List<CurrencyViewModelTest.TestCase> simpleTestCase() {
         return Arrays.asList(
@@ -34,8 +24,8 @@ public class CurrencyViewModelTest {
                 new CurrencyViewModelTest.TestCase(5.00000001, Locale.US, "$5"),
                 new CurrencyViewModelTest.TestCase(5.2, Locale.US, "$5.20"),
                 new CurrencyViewModelTest.TestCase(5.818290382423413523534535, Locale. US, "$5.82"),
-                new CurrencyViewModelTest.TestCase(123456789.7, new Locale("en", "IN"), "₹12,34,56,789.70"),
-                new CurrencyViewModelTest.TestCase(123456789.0, new Locale("en", "IN"), "₹12,34,56,789"),
+                new CurrencyViewModelTest.TestCase(123456789.7, new Locale("en", "IN"), "₹ 12,34,56,789.70"),
+                new CurrencyViewModelTest.TestCase(123456789.0, new Locale("en", "IN"), "₹ 12,34,56,789"),
                 new CurrencyViewModelTest.TestCase(500.0, Locale.JAPAN, "￥500"), // Minimal unit of JPY is ￥1
                 new CurrencyViewModelTest.TestCase(123006.0, Locale.GERMANY, "123.006 €")
         );

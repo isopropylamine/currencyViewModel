@@ -1,5 +1,3 @@
-package com.company;
-
 import com.ibm.icu.text.NumberFormat;
 import lombok.ToString;
 
@@ -10,7 +8,6 @@ import java.util.Locale;
 /**
  * Currency view model. Handles currency formatting and displaying.
  */
-
 @ToString(onlyExplicitlyIncluded = true, includeFieldNames = false)
 public class CurrencyViewModel {
 
@@ -33,14 +30,10 @@ public class CurrencyViewModel {
 
     @ToString.Include
     public String getAmountWithSymbols() {
-
         //if the decimal amount is less than 0.005, then the maximum fraction digits will be discarded
         if(amount.remainder(BigDecimal.ONE).compareTo(BigDecimal.valueOf(0.005)) == -1 ) {
             numberFormat.setMaximumFractionDigits(0);
         }
-
         return numberFormat.format(amount);
-
-
     }
 }
