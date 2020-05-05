@@ -14,7 +14,7 @@ public class CurrencyViewModel {
     private final BigDecimal amount;
     private final NumberFormat numberFormat;
 
-
+    // constructor
     public CurrencyViewModel(double amount, Locale locale) {
         this.amount = new BigDecimal(amount);
         this.numberFormat = NumberFormat.getCurrencyInstance(locale);
