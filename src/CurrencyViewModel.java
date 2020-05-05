@@ -2,6 +2,7 @@ import com.ibm.icu.text.NumberFormat;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Locale;
 
 
@@ -18,6 +19,14 @@ public class CurrencyViewModel {
     public CurrencyViewModel(double amount, Locale locale) {
         this.amount = new BigDecimal(amount);
         this.numberFormat = NumberFormat.getCurrencyInstance(locale);
+
+        //The rounded amount will change the currency amount to one with 2 digits after the decimal
+        BigDecimal roundedAmount = this.amount.setScale(2, RoundingMode.HALF_UP);
+
+        //if the decimal amount is equal to zero, we discard the digits after the decimal
+        if(roundedAmount.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0 ) {
+            numberFormat.setMaximumFractionDigits(0);
+        }
     }
 
     /**
@@ -30,10 +39,7 @@ public class CurrencyViewModel {
 
     @ToString.Include
     public String getAmountWithSymbols() {
-        //if the decimal amount is less than 0.005, then the maximum fraction digits will be discarded
-        if(amount.remainder(BigDecimal.ONE).compareTo(BigDecimal.valueOf(0.005)) == -1 ) {
-            numberFormat.setMaximumFractionDigits(0);
-        }
+
         return numberFormat.format(amount);
     }
 }
