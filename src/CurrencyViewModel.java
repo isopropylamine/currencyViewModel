@@ -10,6 +10,11 @@ import java.util.Locale;
  * Currency view model. Handles currency formatting and displaying.
  */
 @ToString(onlyExplicitlyIncluded = true, includeFieldNames = false)
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 public class CurrencyViewModel {
 
     private final BigDecimal amount;
@@ -17,6 +22,11 @@ public class CurrencyViewModel {
 
     // constructor Test two
     public CurrencyViewModel(double amount, Locale locale) {
+<<<<<<< Updated upstream
+=======
+        //The rounded amount will change the currency amount to one with 2 digits after the decimal
+        this.amount = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
+>>>>>>> Stashed changes
         this.numberFormat = NumberFormat.getCurrencyInstance(locale);
         //Rounds to the maximum fraction digits of the given locale's currency.
         this.amount = new BigDecimal(amount).setScale(numberFormat.getMaximumFractionDigits(), RoundingMode.HALF_UP);;
