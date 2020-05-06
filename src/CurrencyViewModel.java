@@ -10,6 +10,8 @@ import java.util.Locale;
  * Currency view model. Handles currency formatting and displaying.
  */
 @ToString(onlyExplicitlyIncluded = true, includeFieldNames = false)
+public class CurrencyViewModel {
+
 
 public class CurrencyViewModel {
     private final BigDecimal amount;
