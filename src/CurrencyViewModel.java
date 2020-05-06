@@ -17,12 +17,14 @@ public class CurrencyViewModel {
 
     // constructor Test two
     public CurrencyViewModel(double amount, Locale locale) {
+        this.amount = new BigDecimal(amount);
         this.numberFormat = NumberFormat.getCurrencyInstance(locale);
-        //Rounds to the maximum fraction digits of the given locale's currency.
-        this.amount = new BigDecimal(amount).setScale(numberFormat.getMaximumFractionDigits(), RoundingMode.HALF_UP);;
+
+        //The rounded amount will change the currency amount to one with 2 digits after the decimal
+        BigDecimal roundedAmount = this.amount.setScale(2, RoundingMode.HALF_UP);
 
         //if the decimal amount is equal to zero, we discard the digits after the decimal
-        if(this.amount.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0 ) {
+        if(roundedAmount.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0 ) {
             numberFormat.setMaximumFractionDigits(0);
         }
     }
