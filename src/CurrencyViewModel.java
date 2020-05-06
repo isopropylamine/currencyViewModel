@@ -10,18 +10,21 @@ import java.util.Locale;
  * Currency view model. Handles currency formatting and displaying.
  */
 @ToString(onlyExplicitlyIncluded = true, includeFieldNames = false)
-
 public class CurrencyViewModel {
-
     private final BigDecimal amount;
     private final NumberFormat numberFormat;
 
 
     // constructor Test two
     public CurrencyViewModel(double amount, Locale locale) {
-        this.amount = new BigDecimal(amount);
+        //The rounded amount will change the currency amount to one with 2 digits after the decimal
         this.numberFormat = NumberFormat.getCurrencyInstance(locale);
+        this.amount = new BigDecimal(amount).setScale(numberFormat.getMaximumFractionDigits(), RoundingMode.HALF_UP);
 
+        //if the decimal amount is equal to zero, we discard the digits after the decimal
+        if(this.amount.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0 ) {
+            numberFormat.setMaximumFractionDigits(0);
+        }
     }
 
     /**
@@ -34,11 +37,6 @@ public class CurrencyViewModel {
 
     @ToString.Include
     public String getAmountWithSymbols() {
-
-        //if the decimal amount is less than 0.005, then the maximum fraction digits will be discarded
-        if(amount.remainder(BigDecimal.ONE).compareTo(BigDecimal.valueOf(0.005)) == -1 ) {
-            numberFormat.setMaximumFractionDigits(0);
-        }
         return numberFormat.format(amount);
     }
 
