@@ -11,9 +11,6 @@ import java.util.Locale;
  */
 @ToString(onlyExplicitlyIncluded = true, includeFieldNames = false)
 public class CurrencyViewModel {
-
-
-public class CurrencyViewModel {
     private final BigDecimal amount;
     private final NumberFormat numberFormat;
 
