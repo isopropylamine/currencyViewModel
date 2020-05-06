@@ -19,8 +19,8 @@ public class CurrencyViewModel {
     // constructor Test two
     public CurrencyViewModel(double amount, Locale locale) {
         //The rounded amount will change the currency amount to one with 2 digits after the decimal
-        this.amount = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
         this.numberFormat = NumberFormat.getCurrencyInstance(locale);
+        this.amount = new BigDecimal(amount).setScale(numberFormat.getMaximumFractionDigits(), RoundingMode.HALF_UP);
 
         //if the decimal amount is equal to zero, we discard the digits after the decimal
         if(this.amount.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0 ) {
